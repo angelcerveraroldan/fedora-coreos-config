@@ -47,6 +47,7 @@ RUN --mount=type=cache,rw,id=coreos-build-cache,target=/cache \
 RUN --mount=type=cache,rw,id=coreos-build-cache,target=/cache \
     --mount=type=secret,id=container-image-build/yumrepos,target=/run/secrets/yumrepos \
     --mount=type=secret,id=container-image-build/contentsets \
+    --mount=type=bind,from=overrides,target=/src/overrides \
         /src/build-rootfs --srcdir=/src make-rootfs --target-rootfs /target-rootfs
 # Take the rootfs and created a chunked container out of it
 RUN --mount=type=bind,target=/run/src,rw <<EOF
